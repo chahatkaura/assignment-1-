@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Website Heading -->
+    <header id="top">
+        <h1>My Portfolio</h1>
+        <p class="tagline">Welcome to my personal webpage</p>
+
+        <!-- Navigation -->
+        <nav>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Section 1: About Me -->
+    <section id="about">
+        <h2>About Me</h2>
+        <img src="profile.jpg" width="150" height="150" alt="My Photo" title="My Profile Photo">
+        <p>
+            Hello! I am <strong>Your Name</strong>. I am a student who loves learning
+            <em>HTML</em>, <u>CSS</u>, and <mark>Web Development</mark>.
+        </p>
+    </section>
+
+    <!-- Section 2: Education -->
+    <section id="education">
+        <h2>Education</h2>
+
+        <table>
+            <tr>
+                <th>Level</th>
+                <th>School/College</th>
+                <th>Year</th>
+                <th>Percentage</th>
+            </tr>
+            <tr>
+                <td rowspan="1">B.Tech</td>
+                <td>XYZ University</td>
+                <td>2023–2027</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>Class 12</td>
+                <td colspan="2">ABC School</td>
+                <td>87%</td>
+            </tr>
+            <tr>
+                <td>Class 10</td>
+                <td colspan="2">ABC School</td>
+                <td>92%</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Section 3: Skills -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>C++</li>
+            <li>Communication</li>
+        </ul>
+    </section>
+
+    <!-- Section 4: Projects -->
+    <section id="projects">
+        <h2>Projects</h2>
+
+        <h3>Portfolio Website</h3>
+        <p>
+            A simple portfolio website built using HTML & CSS.
+            <a href="https://github.com/your-username" target="_blank">GitHub Link</a>
+        </p>
+
+        <h3>N-Queens Solver</h3>
+        <p>Backtracking-based solution written in C++.</p>
+    </section>
+
+    <!-- Section 5: Contact -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:example@gmail.com">example@gmail.com</a></p>
+
+        <ol>
+            <li>Mail me your query.</li>
+            <li>I will reply within 24 hours.</li>
+        </ol>
+
+        <p>
+            Social Links:
+            <a href="https://github.com/your-username" target="_blank">GitHub</a> |
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made by [Your Name]</p>
+    </footer>
+
+</body>
+</html>
