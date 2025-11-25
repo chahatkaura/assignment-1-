@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Assignment 6 – Enhanced Travel Site | Chahat</title>
+<style>
+body{font-family:Arial, sans-serif;background:#f4f7fb;margin:0;color:#222;}
+.container{max-width:1000px;margin:18px auto;padding:14px;}
+header{display:flex;align-items:center;justify-content:space-between;background:#fff;padding:10px 14px;border-radius:8px;box-shadow:0 4px 10px rgba(0,0,0,0.06);}
+header h1{margin:0;color:#0b76d1;}
+header p{margin:0;font-size:13px;color:#555;}
+nav a{margin-left:8px;text-decoration:none;color:#0b76d1;padding:6px 8px;border-radius:6px;font-size:14px;}
+nav a.active, nav a:hover{background:#0b76d1;color:#fff;}
+.section{background:#fff;padding:12px 14px;border-radius:8px;margin-top:12px;box-shadow:0 4px 12px rgba(0,0,0,0.05);}
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;margin-top:8px;}
+th,td{padding:8px;border:1px solid #e1ecf7;text-align:center;}
+th{background:#e9f3ff;}
+.form-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px;}
+.form-row label{flex:1;min-width:160px;font-size:14px;}
+input,select{padding:7px;width:100%;border-radius:6px;border:1px solid #cfe0f5;}
+button{padding:8px 12px;border:none;border-radius:6px;background:#0b76d1;color:#fff;font-weight:bold;cursor:pointer;margin-top:6px;}
+button:hover{background:#095da6;}
+#est{font-weight:bold;margin-top:6px;color:#0f4f86;}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:8px;}
+.gallery-grid img{width:100%;border-radius:8px;cursor:pointer;}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.65);display:none;align-items:center;justify-content:center;z-index:20;}
+.modal img{max-width:90vw;max-height:80vh;border-radius:10px;}
+.modal-caption{color:#fff;margin-top:8px;text-align:center;}
+.modal-close{position:absolute;top:16px;right:20px;background:#fff;border-radius:50%;padding:6px 9px;font-weight:bold;cursor:pointer;border:none;}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <h1>TravelCo – Assignment 6</h1>
+      <p>Enhanced Travel Website · By Chahat · Thapar Institute of Engineering & Technology</p>
+    </div>
+    <nav>
+      <a href="#home" class="navlink active">Home</a>
+      <a href="#packages" class="navlink">Packages</a>
+      <a href="#estimate" class="navlink">Price Estimator</a>
+      <a href="#gallery" class="navlink">Gallery</a>
+    </nav>
+  </header>
+
+  <section id="home" class="section">
+    <h2>Welcome</h2>
+    <p>This is an enhanced travel site created for <b>Assignment 6</b>. It uses JavaScript arrays, objects, functions and DOM manipulation to show travel packages, calculate estimated price and display a gallery with a simple modal.</p>
+  </section>
+
+  <section id="packages" class="section">
+    <h2>Packages (Loaded from JavaScript)</h2>
+    <p>The table below is generated using a JavaScript array of package objects.</p>
+    <div class="table-wrap">
+      <table id="pkgTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Destination</th>
+            <th>Days</th>
+            <th>Base Price (₹)</th>
+            <th>Season</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- rows from JS -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="estimate" class="section">
+    <h2>Price Estimator</h2>
+    <p>Select a package, number of guests and optional promo code. JavaScript will calculate an estimated cost.</p>
+    <div class="form-row">
+      <label>
+        Package
+        <select id="pkgSelect"></select>
+      </label>
+      <label>
+        Guests
+        <input id="guests" type="number" min="1" value="1">
+      </label>
+      <label>
+        Promo Code
+        <input id="promo" placeholder="EARLYBIRD or FEST10">
+      </label>
+    </div>
+    <div class="form-row">
+      <label>
+        Start Date
+        <input id="start" type="date">
+      </label>
+    </div>
+    <button id="btnCalc">Calculate Estimate</button>
+    <div id="est"></div>
+  </section>
+
+  <section id="gallery" class="section">
+    <h2>Travel Gallery</h2>
+    <p>Click an image to see a larger view in a modal popup.</p>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- images from JS -->
+    </div>
+  </section>
+
+  <footer class="section" style="text-align:center;">
+    &copy; 2025 · Assignment 6 Travel Site · Made by <b>Chahat</b> (TIET)
+  </footer>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <button class="modal-close" onclick="closeModal()">×</button>
+  <div style="text-align:center;">
+    <img id="modalImg" alt="">
+    <div class="modal-caption" id="modalCaption"></div>
+  </div>
+</div>
+
+<script>
+// Data for packages
+const packages = [
+  {id:1, destination:'Goa', days:4, basePrice:9999, season:'Low'},
+  {id:2, destination:'Manali', days:6, basePrice:18499, season:'Mid'},
+  {id:3, destination:'Golden Triangle', days:5, basePrice:12750, season:'High'},
+  {id:4, destination:'Kerala', days:5, basePrice:14200, season:'Mid'}
+];
+
+// Data for gallery
+const images = [
+  {src:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800', caption:'Goa Beach Sunset'},
+  {src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800', caption:'Munnar Tea Hills'},
+  {src:'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800', caption:'Taj Mahal, Agra'},
+  {src:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800', caption:'Himalayan Valley'}
+];
+
+function renderPackages(){
+  const tbody = document.querySelector('#pkgTable tbody');
+  tbody.innerHTML = '';
+  packages.forEach(pkg=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+pkg.id+'</td>'+
+                   '<td>'+pkg.destination+'</td>'+
+                   '<td>'+pkg.days+'</td>'+
+                   '<td>'+pkg.basePrice+'</td>'+
+                   '<td>'+pkg.season+'</td>';
+    tbody.appendChild(tr);
+  });
+}
+function renderPackageSelect(){
+  const select = document.getElementById('pkgSelect');
+  select.innerHTML = '';
+  packages.forEach(pkg=>{
+    const opt = document.createElement('option');
+    opt.value = pkg.id;
+    opt.textContent = pkg.id + ' – ' + pkg.destination;
+    select.appendChild(opt);
+  });
+}
+function computeFinalPrice(pkg, guests, promo, dateStr){
+  let price = pkg.basePrice;
+  const seasonMult = pkg.season === 'High' ? 1.15 : (pkg.season === 'Mid' ? 1.08 : 1.0);
+  price *= seasonMult;
+  if(guests > 1){
+    price *= (1 + 0.3 * (guests - 1)); // extra charge for more guests
+  }
+  if(promo === 'EARLYBIRD' || promo === 'FEST10'){
+    price *= 0.9;
+  }
+  if(dateStr){
+    const d = new Date(dateStr);
+    const day = d.getDay();
+    if(day === 0 || day === 6){ // weekend
+      price *= 1.10;
+    }
+  }
+  return Math.round(price);
+}
+document.getElementById('btnCalc').addEventListener('click',()=>{
+  const id = Number(document.getElementById('pkgSelect').value);
+  const guests = Number(document.getElementById('guests').value) || 1;
+  const promo = (document.getElementById('promo').value || '').trim().toUpperCase();
+  const start = document.getElementById('start').value;
+  const pkg = packages.find(p=>p.id===id);
+  if(!pkg){
+    document.getElementById('est').textContent = 'Please select a package.';
+    return;
+  }
+  const total = computeFinalPrice(pkg, guests, promo, start);
+  document.getElementById('est').textContent =
+    'Estimated total for '+guests+' guest(s) to '+pkg.destination+': ₹ '+total;
+});
+
+function renderGallery(){
+  const grid = document.getElementById('galleryGrid');
+  grid.innerHTML = '';
+  images.forEach(img=>{
+    const el = document.createElement('img');
+    el.src = img.src;
+    el.alt = img.caption;
+    el.addEventListener('click',()=>openModal(img));
+    grid.appendChild(el);
+  });
+}
+function openModal(img){
+  document.getElementById('modalImg').src = img.src;
+  document.getElementById('modalCaption').textContent = img.caption;
+  document.getElementById('modal').style.display = 'flex';
+}
+function closeModal(){
+  document.getElementById('modal').style.display = 'none';
+}
+document.getElementById('modal').addEventListener('click',e=>{
+  if(e.target.id === 'modal'){closeModal();}
+});
+
+// nav active state
+document.querySelectorAll('.navlink').forEach(link=>{
+  link.addEventListener('click',e=>{
+    document.querySelectorAll('.navlink').forEach(a=>a.classList.remove('active'));
+    e.target.classList.add('active');
+  });
+});
+
+// init
+renderPackages();
+renderPackageSelect();
+renderGallery();
+</script>
+</body>
+</html>
