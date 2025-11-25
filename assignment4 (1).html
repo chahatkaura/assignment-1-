@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Assignment 4 – Enhanced Tech Fest | Chahat</title>
+
+<style>
+    body{font-family:Arial, sans-serif; margin:0; background:#f3f7ff; color:#222;}
+    header{background:#0b76d1; color:white; padding:18px; text-align:center;}
+    nav{background:white; padding:10px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+    nav a{text-decoration:none; margin:0 10px; font-weight:bold; color:#0b76d1;}
+    section{padding:20px;}
+    h2{color:#0f4f86;}
+    .card{background:white; padding:18px; border-radius:10px; margin-top:15px; box-shadow:0 4px 12px rgba(0,0,0,0.08);}
+    table{width:100%; border-collapse:collapse; margin-top:10px;}
+    th,td{padding:10px; border:1px solid #d6e8fa;}
+    th{background:#e6f2ff;}
+    .gallery-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;}
+    .gallery-grid img{width:100%; border-radius:10px;}
+    form label{display:block; margin-top:10px;}
+    form input, form select, textarea{width:100%; padding:10px; margin-top:5px; border-radius:6px; border:1px solid #cfe0f5;}
+    form button{margin-top:12px; background:#0b76d1; color:white; border:none; width:100%; padding:10px; border-radius:6px;}
+    iframe{width:100%; max-width:700px; height:350px; border-radius:10px; margin-top:10px;}
+    audio{margin-top:10px; width:100%;}
+    footer{text-align:center; margin:20px 0; color:#777;}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Assignment 4 – Enhanced Tech Fest Website</h1>
+    <p>By <b>Chahat</b> | Thapar Institute of Engineering & Technology</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#register">Register</a>
+    <a href="#media">Media</a>
+</nav>
+
+<section id="home">
+    <div class="card">
+        <h2>Welcome to Tech Fest 2025</h2>
+        <p>This enhanced website includes video, audio, tables, gallery, forms, and interactive content.</p>
+    </div>
+</section>
+
+<section id="schedule">
+    <div class="card">
+        <h2>Event Schedule</h2>
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Event</th>
+                <th>Venue</th>
+                <th>Coordinator</th>
+            </tr>
+            <tr>
+                <td>09:30 AM</td>
+                <td>Opening Ceremony</td>
+                <td>Main Hall</td>
+                <td>Prof. Sharma</td>
+            </tr>
+            <tr>
+                <td>11:00 AM</td>
+                <td>AI Workshop</td>
+                <td>Lab 1</td>
+                <td>Dr. Kaur</td>
+            </tr>
+            <tr>
+                <td>02:00 PM</td>
+                <td>Robotics Demo</td>
+                <td>Auditorium</td>
+                <td>Ms. Gupta</td>
+            </tr>
+            <tr>
+                <td>04:00 PM</td>
+                <td>Dance Fest</td>
+                <td>Open Theatre</td>
+                <td>Mr. Verma</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section id="gallery">
+    <div class="card">
+        <h2>Photo Gallery</h2>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600" alt="Dance Event">
+            <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?w=600" alt="Coding Event">
+            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600" alt="Students">
+            <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=600" alt="Stage Performance">
+        </div>
+    </div>
+</section>
+
+<section id="register">
+    <div class="card">
+        <h2>Register for an Event</h2>
+
+        <form onsubmit="registerEvent(event)">
+            <label>Name*</label>
+            <input type="text" id="name" required>
+
+            <label>Email*</label>
+            <input type="email" id="email" required>
+
+            <label>Select Event*</label>
+            <select id="event" required>
+                <option value="">-- Select --</option>
+                <option>AI Workshop</option>
+                <option>Coding Marathon</option>
+                <option>Robotics Demo</option>
+                <option>Dance Fest</option>
+            </select>
+
+            <label>Remarks</label>
+            <textarea id="remarks" rows="3"></textarea>
+
+            <button type="submit">Submit Registration</button>
+        </form>
+
+        <div id="output" style="margin-top:15px;color:#0b76d1;font-weight:bold;"></div>
+    </div>
+</section>
+
+<section id="media">
+    <div class="card">
+        <h2>Event Media</h2>
+
+        <h3>Event Video</h3>
+        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" allowfullscreen></iframe>
+
+        <h3>Announcement Audio</h3>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+</section>
+
+<footer>
+    © 2025 — Assignment 4 — Created by <b>Chahat</b> | TIET
+</footer>
+
+<script>
+function registerEvent(e){
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const event = document.getElementById("event").value;
+    document.getElementById("output").innerHTML =
+        "Thank you " + name + "!<br>You have registered for: " + event;
+}
+</script>
+
+</body>
+</html>
