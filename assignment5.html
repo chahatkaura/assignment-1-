@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Assignment 5 – JavaScript Tasks | Chahat</title>
+
+<style>
+body{
+    font-family:Arial, sans-serif;
+    background:#f5f7fa;
+    margin:0;
+    padding:20px;
+}
+h1{
+    text-align:center;
+    color:#0b76d1;
+}
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+button{
+    padding:8px 14px;
+    background:#0b76d1;
+    color:white;
+    border:none;
+    border-radius:6px;
+    margin-top:10px;
+}
+input{
+    padding:8px;
+    width:100%;
+    margin-top:5px;
+}
+pre{
+    background:#eef6ff;
+    padding:10px;
+    border-radius:6px;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Assignment 5 – JavaScript Tasks<br>By Chahat | TIET</h1>
+
+<div class="card">
+<h2>1. Sum, Difference, Product, Quotient</h2>
+<label>Enter A: <input id="numA" type="number"></label>
+<label>Enter B: <input id="numB" type="number"></label>
+<button onclick="compute1()">Calculate</button>
+<pre id="out1"></pre>
+</div>
+
+<div class="card">
+<h2>2. Array Operations</h2>
+<label>Enter numbers (comma-separated): <input id="arr" value="5,2,9,1,6"></label>
+<button onclick="compute2()">Process</button>
+<pre id="out2"></pre>
+</div>
+
+<div class="card">
+<h2>3. Form Validation</h2>
+<label>Name: <input id="fname"></label>
+<label>Email: <input id="femail"></label>
+<label>Age: <input id="fage" type="number"></label>
+<button onclick="validateForm()">Validate</button>
+<pre id="out3"></pre>
+</div>
+
+<div class="card">
+<h2>4. Student Object Manipulation</h2>
+<button onclick="studentOps()">Show Student Object</button>
+<pre id="out4"></pre>
+</div>
+
+<div class="card">
+<h2>5. Array Functions – Filter, Map, Reduce</h2>
+<label>Array (comma separated): <input id="arrOps" value="1,2,3,4,5,6"></label>
+<button onclick="arrayOps()">Run</button>
+<pre id="out5"></pre>
+</div>
+
+<script>
+function compute1(){
+    let a = Number(document.getElementById('numA').value);
+    let b = Number(document.getElementById('numB').value);
+    let out =
+        "Sum: " + (a+b) + "\n" +
+        "Difference: " + (a-b) + "\n" +
+        "Product: " + (a*b) + "\n" +
+        "Quotient: " + (b!==0 ? a/b : "Infinity");
+    document.getElementById('out1').textContent = out;
+}
+
+function compute2(){
+    let arr = document.getElementById('arr').value.split(',').map(x=>Number(x.trim()));
+    let max = Math.max(...arr);
+    let min = Math.min(...arr);
+    let asc = [...arr].sort((a,b)=>a-b);
+    let desc = [...arr].sort((a,b)=>b-a);
+    document.getElementById('out2').textContent =
+        "Array: " + arr + "\n" +
+        "Max: " + max + "\n" +
+        "Min: " + min + "\n" +
+        "Ascending: " + asc + "\n" +
+        "Descending: " + desc;
+}
+
+function validateForm(){
+    let name = document.getElementById('fname').value.trim();
+    let email = document.getElementById('femail').value.trim();
+    let age = Number(document.getElementById('fage').value);
+    let out = "";
+    if(!name) out += "Name cannot be empty.\n";
+    if(!email.includes('@')) out += "Invalid email.\n";
+    if(age < 18 || age > 100) out += "Age must be between 18 and 100.\n";
+    if(out==="") out = "Form is valid!";
+    document.getElementById('out3').textContent = out;
+}
+
+function studentOps(){
+    let student = {name:"Riya", age:20, grade:"B"};
+    student.branch = "CSE";
+    student.grade = "A";
+    document.getElementById('out4').textContent = JSON.stringify(student, null, 2);
+}
+
+function arrayOps(){
+    let arr = document.getElementById('arrOps').value.split(',').map(n=>Number(n.trim()));
+    let even = arr.filter(n=>n%2===0);
+    let doubled = even.map(n=>n*2);
+    let sum = doubled.reduce((a,b)=>a+b, 0);
+    document.getElementById('out5').textContent =
+        "Even numbers: " + even + "\n" +
+        "Doubled: " + doubled + "\n" +
+        "Sum: " + sum;
+}
+</script>
+
+</body>
+</html>
