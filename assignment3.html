@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>College Event - Assignment 3 (Chahat)</title>
+<style>
+  body{font-family:Arial, sans-serif;margin:0;background:#f5f7fa;color:#222;}
+  header{background:#0b76d1;color:#fff;padding:15px;text-align:center;}
+  header h1{margin:0;}
+  header p{margin:4px 0 0;font-size:14px;}
+  nav{background:#ffffff;padding:10px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.05);}
+  nav a{text-decoration:none;color:#0b76d1;margin:0 8px;font-weight:bold;}
+  section{padding:18px;max-width:1000px;margin:0 auto;}
+  .card{background:#ffffff;border-radius:10px;padding:16px;margin-top:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04);}
+  h2{margin-top:0;color:#0f4f86;}
+  ul{padding-left:18px;}
+  table{width:100%;border-collapse:collapse;margin-top:10px;}
+  th,td{padding:8px;border:1px solid #d8e7f7;text-align:center;}
+  th{background:#e8f3ff;}
+  form label{display:block;margin-top:8px;font-size:14px;}
+  form input, form select{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #d8e7f7;}
+  form button{margin-top:10px;padding:10px;width:100%;border:none;border-radius:6px;background:#0b76d1;color:#fff;font-weight:bold;cursor:pointer;}
+  form button:hover{background:#095da6;}
+  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px;}
+  .gallery-grid img{width:100%;border-radius:8px;}
+  footer{text-align:center;padding:15px;margin-top:20px;color:#777;font-size:13px;}
+  #regList table{margin-top:10px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Thapar Tech Fest 2025</h1>
+  <p>Assignment 3 &mdash; Event Website &mdash; By <b>Chahat</b>, Thapar Institute of Engineering & Technology</p>
+</header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#events">Events</a>
+  <a href="#schedule">Schedule</a>
+  <a href="#register">Register</a>
+  <a href="#gallery">Gallery</a>
+</nav>
+
+<section id="home">
+  <div class="card">
+    <h2>Welcome</h2>
+    <p>Welcome to <b>Thapar Tech Fest 2025</b> hosted by <b>Thapar Institute of Engineering & Technology</b>. This website is created as <b>Assignment 3</b>.</p>
+    <p>Explore the events, check the schedule, register online and view photos from previous years.</p>
+  </div>
+</section>
+
+<section id="events">
+  <div class="card">
+    <h2>Events & Competitions</h2>
+    <ul>
+      <li><b>Code Marathon</b> &mdash; Individual coding competition.</li>
+      <li><b>Web Design</b> &mdash; Team of 2&ndash;3 students.</li>
+      <li><b>Dance Battle</b> &mdash; Group cultural event.</li>
+      <li><b>Poster Making</b> &mdash; Solo creative event.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="schedule">
+  <div class="card">
+    <h2>Event Schedule</h2>
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>Event</th>
+        <th>Venue</th>
+        <th>Coordinator</th>
+      </tr>
+      <tr>
+        <td>09:30 AM</td>
+        <td>Inauguration</td>
+        <td>Main Auditorium</td>
+        <td>Prof. Sharma</td>
+      </tr>
+      <tr>
+        <td>11:00 AM</td>
+        <td>Code Marathon</td>
+        <td>Lab A</td>
+        <td>Ms. Gupta</td>
+      </tr>
+      <tr>
+        <td>02:00 PM</td>
+        <td>Web Design</td>
+        <td>CS Block</td>
+        <td>Mr. Verma</td>
+      </tr>
+      <tr>
+        <td>04:00 PM</td>
+        <td>Dance Battle</td>
+        <td>Open Air Theatre</td>
+        <td>Ms. Kaur</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section id="register">
+  <div class="card">
+    <h2>Registration Form</h2>
+    <form id="regForm" onsubmit="handleReg(event)">
+      <label>Student Name*</label>
+      <input type="text" id="rname" required>
+
+      <label>Email*</label>
+      <input type="email" id="remail" required>
+
+      <label>Mobile</label>
+      <input type="tel" id="rmobile">
+
+      <label>Select Event</label>
+      <select id="revent">
+        <option>Code Marathon</option>
+        <option>Web Design</option>
+        <option>Dance Battle</option>
+        <option>Poster Making</option>
+      </select>
+
+      <label>Team Members (if any)</label>
+      <input type="text" id="rteam" placeholder="Write names separated by comma">
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div id="regList"></div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="card">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600" alt="Stage performance">
+      <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?w=600" alt="Coding event">
+      <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600" alt="Students working">
+      <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=600" alt="Dance event">
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 &mdash; Assignment 3 Event Website &mdash; Made by <b>Chahat</b>, Thapar Institute of Engineering & Technology
+</footer>
+
+<script>
+  const regs = [];
+  function handleReg(e){
+    e.preventDefault();
+    const name = document.getElementById('rname').value.trim();
+    const email = document.getElementById('remail').value.trim();
+    const mobile = document.getElementById('rmobile').value.trim();
+    const event = document.getElementById('revent').value;
+    const team = document.getElementById('rteam').value.trim();
+
+    if(!name || !email){
+      alert('Please fill name and email.');
+      return;
+    }
+
+    regs.push({name, email, mobile, event, team, time: new Date().toLocaleString()});
+    renderRegs();
+    document.getElementById('regForm').reset();
+    alert('Registration saved (demo only).');
+  }
+
+  function renderRegs(){
+    const container = document.getElementById('regList');
+    if(regs.length === 0){
+      container.innerHTML = "";
+      return;
+    }
+    let html = "<h3>Registrations</h3><table><tr><th>Name</th><th>Email</th><th>Event</th><th>Team</th><th>Time</th></tr>";
+    regs.forEach(r => {
+      html += "<tr><td>" + r.name + "</td><td>" + r.email + "</td><td>" + r.event + "</td><td>" + (r.team || "-") + "</td><td>" + r.time + "</td></tr>";
+    });
+    html += "</table>";
+    container.innerHTML = html;
+  }
+</script>
+
+</body>
+</html>
