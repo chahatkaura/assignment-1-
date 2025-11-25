@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Assignment 7 – To‑Do List | Chahat</title>
+<style>
+body{font-family:Arial, sans-serif;background:#f6fbff;margin:0;padding:16px;}
+#app{max-width:750px;margin:0 auto;}
+header{display:flex;justify-content:space-between;align-items:center;background:#0b76d1;color:#fff;padding:12px 16px;border-radius:10px;}
+header h1{margin:0;font-size:22px;}
+header small{font-size:12px;opacity:0.9;}
+section{margin-top:14px;background:#ffffff;padding:14px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
+label{display:block;margin-top:8px;font-size:14px;}
+input,textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #d6eaf6;margin-top:4px;font-family:inherit;font-size:14px;}
+button{padding:8px 12px;border-radius:6px;border:none;background:#0b76d1;color:#fff;font-weight:bold;cursor:pointer;margin-top:10px;}
+button:hover{background:#095da6;}
+.task{background:#fdfefe;border-radius:8px;padding:10px;margin-top:8px;display:flex;gap:10px;align-items:flex-start;border:1px solid #e3eef8;}
+.task.completed .title{text-decoration:line-through;color:#999;}
+.task .title{font-weight:bold;}
+.task .actions{margin-left:auto;display:flex;flex-direction:column;gap:6px;}
+.task .actions button{background:#eef3fb;color:#111;border:1px solid #d3e0f5;font-size:12px;margin:0;padding:6px 8px;}
+.task .actions button:hover{background:#dde8ff;}
+.empty{color:#777;font-size:14px;margin-top:6px;}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div>
+      <h1>To‑Do List – Assignment 7</h1>
+      <small>By Chahat · Thapar Institute of Engineering & Technology</small>
+    </div>
+  </header>
+
+  <section id="create">
+    <h2>Create / Edit Task</h2>
+    <label>Title
+      <input id="title" placeholder="Eg: Complete Web Assignment">
+    </label>
+    <label>Description
+      <textarea id="desc" rows="3" placeholder="Write details about the task here..."></textarea>
+    </label>
+    <button id="addBtn">Add Task</button>
+  </section>
+
+  <section id="tasksSection">
+    <h2>My Tasks</h2>
+    <div id="tasks"></div>
+  </section>
+</div>
+
+<script>
+let tasks = [];
+
+function render(){
+  const container = document.getElementById('tasks');
+  container.innerHTML = '';
+  if(tasks.length === 0){
+    const p = document.createElement('p');
+    p.className = 'empty';
+    p.textContent = 'No tasks added yet. Create a new task above.';
+    container.appendChild(p);
+    return;
+  }
+  tasks.forEach((t, index)=>{
+    const wrapper = document.createElement('div');
+    wrapper.className = 'task' + (t.done ? ' completed' : '');
+
+    const content = document.createElement('div');
+    const title = document.createElement('div');
+    title.className = 'title';
+    title.textContent = t.title;
+    const desc = document.createElement('div');
+    desc.className = 'desc';
+    desc.textContent = t.desc || '(No description)';
+    content.appendChild(title);
+    content.appendChild(desc);
+
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.textContent = t.done ? 'Mark Incomplete' : 'Mark Completed';
+    toggleBtn.onclick = function(){
+      t.done = !t.done;
+      render();
+    };
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.onclick = function(){
+      startEdit(index);
+    };
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.onclick = function(){
+      if(confirm('Delete this task?')){
+        tasks.splice(index, 1);
+        render();
+      }
+    };
+
+    actions.appendChild(toggleBtn);
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+
+    wrapper.appendChild(content);
+    wrapper.appendChild(actions);
+    container.appendChild(wrapper);
+  });
+}
+
+function startEdit(i){
+  const t = tasks[i];
+  const title = document.getElementById('title');
+  const desc = document.getElementById('desc');
+  title.value = t.title;
+  desc.value = t.desc;
+  const btn = document.getElementById('addBtn');
+  btn.textContent = 'Save Changes';
+  btn.onclick = function(){
+    t.title = title.value.trim();
+    t.desc = desc.value.trim();
+    title.value = '';
+    desc.value = '';
+    btn.textContent = 'Add Task';
+    btn.onclick = addTask;
+    render();
+  };
+}
+
+function addTask(){
+  const titleEl = document.getElementById('title');
+  const descEl = document.getElementById('desc');
+  const title = titleEl.value.trim();
+  const desc = descEl.value.trim();
+  if(!title){
+    alert('Title is required');
+    return;
+  }
+  tasks.push({title, desc, done:false});
+  titleEl.value = '';
+  descEl.value = '';
+  render();
+}
+
+document.getElementById('addBtn').onclick = addTask;
+
+// initial render
+render();
+</script>
+</body>
+</html>
